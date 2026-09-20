@@ -76,5 +76,5 @@ Clean, decoupled MonoBehaviour composition:
 ---
 
 ## 🙏 Thank You
-
+Special thanks to Poly Pizza for providing free 3D assets used in this project.
 Thank you so much for the opportunity to work on this assignment. I genuinely enjoyed building it — from the procedural platforms and AI to the game-feel polish and mobile setup. It was a great chance to apply clean architecture to a fun, complete game loop, and I learned a lot along the way. I truly appreciate your time in reviewing it. 🎉
