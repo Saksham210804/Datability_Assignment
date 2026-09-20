@@ -24,6 +24,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             eventData.pressEventCamera,
             out localPoint);
 
+        // Measure from the joystick's center, whatever its pivot/anchor is.
+        localPoint -= background.rect.center;
+
         Vector2 offset = Vector2.ClampMagnitude(localPoint, handleRange);
 
         handle.anchoredPosition = offset;
