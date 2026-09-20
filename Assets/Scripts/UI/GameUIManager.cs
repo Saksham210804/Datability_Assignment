@@ -1,21 +1,35 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class GameUIManager : MonoBehaviour
 {
     [Header("HUD")]
-    [SerializeField] private Text playersRemainingText;
+    [SerializeField] private TMP_Text playersRemainingText;
 
     [Header("Start")]
     [SerializeField] private GameObject startPanel;
-    [SerializeField] private Text countdownText;
+    [SerializeField] private TMP_Text countdownText;
     [SerializeField] private int countdownFrom = 5;
 
     [Header("End Screens")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject victoryPanel;
+
+    private void OnEnable()
+    {
+        EventManager.characterDeath += UpdateRemainingPlayer;
+        EventManager.GameOver += GameOver;
+        EventManager.Victory += Victory;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.characterDeath -= UpdateRemainingPlayer;
+        EventManager.GameOver -= GameOver;
+        EventManager.Victory -= Victory;
+    }
 
     private void Start()
     {
@@ -32,19 +46,25 @@ public class GameUIManager : MonoBehaviour
             startPanel.SetActive(true);
     }
 
-    private void Update()
+
+
+    private void UpdateRemainingPlayer()
     {
         GameManager gameManager = GameManager.Instance;
-
-        if (gameManager == null)
-            return;
-
         if (playersRemainingText != null)
-            playersRemainingText.text = "Players Remaining: " + gameManager.GetRemainingPlayers();
+            playersRemainingText.text = "Players Remaining: " + gameManager.RemainingPlayers;
+    }
 
+    private void GameOver()
+    {
+        GameManager gameManager = GameManager.Instance;
         if (gameManager.CurrentState == GameState.GameOver && gameOverPanel != null)
             gameOverPanel.SetActive(true);
+    }
 
+    private void Victory()
+    {
+        GameManager gameManager = GameManager.Instance;
         if (gameManager.CurrentState == GameState.Victory && victoryPanel != null)
             victoryPanel.SetActive(true);
     }
@@ -75,6 +95,8 @@ public class GameUIManager : MonoBehaviour
 
         if (GameManager.Instance != null)
             GameManager.Instance.StartGame();
+        GameManager gameManager = GameManager.Instance;
+        playersRemainingText.text = "Players Remaining: " + gameManager.RemainingPlayers;
     }
 
     public void Retry()

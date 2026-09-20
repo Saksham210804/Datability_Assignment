@@ -16,7 +16,7 @@ public class CharacterFallDetector : MonoBehaviour
         if (gameManager == null)
             return;
 
-        if (transform.position.y <= gameManager.GetFallHeight())
+        if (transform.position.y <= gameManager.FallHeight)
         {
             hasFallen = true;
 

@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 8f;
 
     [Header("Ground Detection")]
-    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private float groundCheckDistance = 0.1f;
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody rb;
@@ -24,14 +24,22 @@ public class CharacterMovement : MonoBehaviour
 
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        // Stay still until the match actually starts (GameManager calls Activate()).
+        rb.isKinematic = true;
     }
 
     private void FixedUpdate()
     {
-        if (isFrozen)
+        if (isFrozen || rb.isKinematic)
             return;
 
         ApplyMovement();
+    }
+
+    public void Activate()
+    {
+        rb.isKinematic = false;
     }
 
     public void Move(Vector3 direction)
@@ -75,6 +83,9 @@ public class CharacterMovement : MonoBehaviour
             rb.linearVelocity.y,
             targetVelocity.z
         );
+
+        // Rotation is fully controlled below, so cancel any spin from collisions.
+        rb.angularVelocity = Vector3.zero;
 
         RotateTowards(movementDirection);
     }

@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 82647812a37f19b48bbde341f6b35e94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.03439
+      value: 4.48175
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82647812a37f19b48bbde341f6b35e94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.15705
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82647812a37f19b48bbde341f6b35e94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.9611
+      value: 5.74544
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82647812a37f19b48bbde341f6b35e94, type: 3}
       propertyPath: m_LocalRotation.w
@@ -102,7 +102,7 @@ MonoBehaviour:
     m_Bits: 128
   collapseDelay: 0.6
   fadeDuration: 0.5
-  pressedDistance: 0.15
+  pressedDistance: 0.25
 --- !u!65 &1086047471523035328
 BoxCollider:
   m_ObjectHideFlags: 0
